@@ -1,0 +1,19 @@
+{
+  "general": {
+    "login_uppercase": "LOGIN",
+    "not_registered": "Not registered yet? Register!",
+    "register_uppercase": "REGISTER",
+    "already_registered": "Already registered? Login!",
+    "continue_with_google": "Continue with Google",
+    "email": "Email",
+    "password": "Password",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "cant_sign_in_toast": "Can't Sign In you! Please check your email/password",
+    "cant_register_toast": "Can't Register you! Please check your email/password",
+    "logout": "Log out",
+    "cant_be_empty": "Can't be empty",
+    "too_short": "Too short",
+    "no_internet_connection": "No internet connection"
+  }
+}
