@@ -1,7 +1,8 @@
 library data;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'package:dio/dio.dart';
+
+export 'src/di/data_di.dart';
+export 'src/model/category.dart';
+export 'src/providers/firebase/auth_provider.dart';
+export 'src/repositories/auth_repository_impl.dart';
