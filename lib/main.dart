@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:core_ui/core_ui.dart';
 import 'package:data/data.dart';
 import 'package:data/src/model/user.dart' as data;
@@ -11,15 +13,26 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: const FirebaseOptions(
-      //todo refactor
-      apiKey: 'AIzaSyAiT93RiXxIA_dNWgySy5jaOcAlkuRbWOE',
-      appId: '1:616009798129:android:3507f8a0c88648e5abf450',
-      messagingSenderId: '616009798129',
-      projectId: 'knowyourtime-7c7b0',
-    ),
-  );
+  if (Platform.isAndroid) {
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
+        apiKey: 'AIzaSyCpCbmnwc6OaoAIKifKrwzS5E729I1TDRI',
+        appId: '1:841114373753:android:ddc56df076749ff18c0ea8',
+        messagingSenderId: '841114373753',
+        projectId: 'medical-data-accounting-system',
+      ),
+    );
+  } else if (Platform.isIOS) {
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
+        apiKey: 'AIzaSyD7RmIAlFOO455EfhseI65IrA27Br8fkjo',
+        appId: '1:841114373753:ios:d8be70d462013baf8c0ea8',
+        messagingSenderId: '841114373753',
+        projectId: 'medical-data-accounting-system',
+      ),
+    );
+  }
+
   final DataDi dataDi = DataDi(serviceLocator: appDependencies);
   await dataDi.init();
   runApp(

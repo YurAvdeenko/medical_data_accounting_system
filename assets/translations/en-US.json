@@ -1,6 +1,7 @@
 {
   "general": {
     "login_uppercase": "LOGIN",
+    "label_uppercase": "Medical data system",
     "not_registered": "Not registered yet? Register!",
     "register_uppercase": "REGISTER",
     "already_registered": "Already registered? Login!",

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "841114373753",
+    "project_id": "medical-data-accounting-system",
+    "storage_bucket": "medical-data-accounting-system.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:841114373753:android:ddc56df076749ff18c0ea8",
+        "android_client_info": {
+          "package_name": "com.example.user_medical_data_accounting_system"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "841114373753-7d9d4jd0i5d140ul3ug535i1qrjvq9bh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpCbmnwc6OaoAIKifKrwzS5E729I1TDRI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "841114373753-7d9d4jd0i5d140ul3ug535i1qrjvq9bh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

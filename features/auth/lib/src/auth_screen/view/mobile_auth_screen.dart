@@ -25,13 +25,13 @@ class MobileAuthorizationPage extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             resizeToAvoidBottomInset: false,
-            backgroundColor: AppColors.darkBlue,
+            backgroundColor: AppColors.violetSocial,
             body: state.isInternetAvailable!
                 ? Column(
                     children: <Widget>[
                       const Spacer(flex: 2),
                       LogoWithLabel(mainAxisAlignment: MainAxisAlignment.center),
-                      state.isUserRegistered!
+                      state.isUserRegistered ?? true
                           ? Expanded(
                               flex: 7,
                               child: Column(
@@ -48,17 +48,13 @@ class MobileAuthorizationPage extends StatelessWidget {
                                       );
                                     },
                                   ),
-                                  GestureDetector(
+                                  InkWell(
                                     child: Text(
                                       'general.not_registered'.tr(),
                                       style: AppTextStyle.rubicItalic20,
                                     ),
                                     onTap: () {
-                                      bloc.add(
-                                        UpdateUserRegistrationStatusEvent(
-                                          isUserRegister: false,
-                                        ),
-                                      );
+                                      bloc.add(UpdateUserRegistrationStatusEvent(isUserRegister: false));
                                     },
                                   ),
                                   const SizedBox(height: AppDimensions.padding10),
@@ -76,9 +72,7 @@ class MobileAuthorizationPage extends StatelessWidget {
                                           color: AppColors.white,
                                         ),
                                         child: IconButton(
-                                          onPressed: () => context.read<AuthBloc>().add(
-                                                SignInWithGoogleEvent(),
-                                              ),
+                                          onPressed: () => context.read<AuthBloc>().add(SignInWithGoogleEvent()),
                                           icon: Image.asset(
                                             'assets/images/google_icon.png',
                                             height: AppDimensions.imageSize40,

@@ -12,12 +12,12 @@ class LogoWithLabel extends StatelessWidget {
       child: Row(
         mainAxisAlignment: mainAxisAlignment,
         children: <Widget>[
-          Image.asset(
-            'assets/images/calendar_icon.png',
-            width: AppDimensions.imageSize40,
-            height: AppDimensions.imageSize40,
-          ),
-          const SizedBox(width: AppDimensions.padding10),
+          // Image.asset(
+          //   'assets/images/calendar_icon.png',
+          //   width: AppDimensions.imageSize40,
+          //   height: AppDimensions.imageSize40,
+          // ),
+          // const SizedBox(width: AppDimensions.padding10),
           Text(
             'general.label_uppercase'.tr(),
             style: AppTextStyle.rubicRegularMobileLabel,
