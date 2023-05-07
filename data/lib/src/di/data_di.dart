@@ -27,7 +27,6 @@ class DataDi {
     _serviceLocator.registerLazySingleton<AuthProvider>(
       () => AuthProvider(),
     );
-
   }
 
   void _initRepositories() {

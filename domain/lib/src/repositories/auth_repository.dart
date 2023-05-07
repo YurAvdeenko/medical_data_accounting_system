@@ -20,7 +20,6 @@ class EmailAndPassword {
   });
 }
 
-//todo remove
 class GoogleSignIn implements SignInSocialParam {}
 
 class AppleSignIn implements SignInSocialParam {}
