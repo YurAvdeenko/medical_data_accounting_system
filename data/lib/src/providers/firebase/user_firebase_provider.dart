@@ -42,7 +42,7 @@ class UserFirebaseProvider implements UserProvider {
 
     return data.User(
       id: user.uid,
-      fullName: user.displayName ?? 'Sanya',
+      fullName: user.displayName ?? 'Avdeenko Yury',
     );
   }
 }

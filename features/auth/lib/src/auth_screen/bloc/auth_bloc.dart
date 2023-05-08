@@ -18,7 +18,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignInWithFacebookEvent>(_signInWithFacebook);
     on<SignInWithGoogleEvent>(_signInWithGoogle);
     on<RegisterWithEmailAndPasswordEvent>(_registerWithEmailAndPassword);
-    on<UpdateUserRegistrationStatusEvent>(_updateUserRegistrationStatus);
+    on<UpdateUserRegisteredStatusEvent>(_onUpdateUserRegisteredStatusEvent);
+    on<UpdateUserNotRegisteredStatusEvent>(_onUpdateUserNotRegisteredStatusEvent);
     on<CheckOfflineModeEvent>(_onCheckOfflineMode);
 
     _connectivity.onConnectivityChanged.listen(
@@ -40,13 +41,24 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
-  void _updateUserRegistrationStatus(
-    UpdateUserRegistrationStatusEvent event,
+  void _onUpdateUserRegisteredStatusEvent(
+    UpdateUserRegisteredStatusEvent event,
     Emitter<AuthState> emit,
   ) {
     emit(
       state.copyWith(
-        isUserRegistered: event.isUserRegister,
+        isUserRegistered: true,
+      ),
+    );
+  }
+
+  void _onUpdateUserNotRegisteredStatusEvent(
+    UpdateUserNotRegisteredStatusEvent event,
+    Emitter<AuthState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        isUserRegistered: false,
       ),
     );
   }
@@ -61,12 +73,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (_email.isEmpty || _password.isEmpty) {
       return;
     }
+
     final User? user = await _authRepository.signInWithEmailAndPassword(
       EmailAndPassword(
         email: _email.trim(),
         password: _password.trim(),
       ),
     );
+
     if (user == null) {
       Fluttertoast.showToast(
         msg: 'general.cant_sign_in_toast'.tr(),
@@ -117,12 +131,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (_email.isEmpty || _password.isEmpty) {
       return;
     }
+
     final User? user = await _authRepository.signUpWithEmailAndPassword(
       EmailAndPassword(
         email: _email.trim(),
         password: _password.trim(),
       ),
     );
+
     if (user == null) {
       Fluttertoast.showToast(
         msg: 'general.cant_register_toast'.tr(),

@@ -1,10 +1,12 @@
-class AuthState {
-  final bool? isUserRegistered;
-  final bool? isInternetAvailable;
+import 'package:equatable/equatable.dart';
+
+class AuthState extends Equatable{
+  final bool isUserRegistered;
+  final bool isInternetAvailable;
 
   AuthState({
-    this.isUserRegistered,
-    this.isInternetAvailable,
+    required this.isUserRegistered,
+    required this.isInternetAvailable,
   });
 
   factory AuthState.initState() {
@@ -23,4 +25,7 @@ class AuthState {
       isInternetAvailable: isInternetAvailable ?? this.isInternetAvailable,
     );
   }
+
+  @override
+  List<Object> get props => <Object>[isUserRegistered, isInternetAvailable];
 }

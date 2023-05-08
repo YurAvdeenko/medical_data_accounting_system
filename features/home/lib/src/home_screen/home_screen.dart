@@ -3,6 +3,7 @@ import 'package:di/di.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:home/src/home_screen/bloc/home_bloc.dart';
+import 'package:home/src/home_screen/bloc/home_event.dart';
 import 'package:home/src/home_screen/bloc/home_state.dart';
 import 'package:home/src/home_screen/view/mobile_home_screen.dart';
 
@@ -15,7 +16,7 @@ class HomePage extends StatelessWidget {
       create: (context) => HomeBloc(
         userRepository: appDependencies.get<UserRepository>(),
         authRepository: appDependencies.get<AuthRepository>(),
-      ),
+      )..add(GetUser()),
       child: const _HomePage(),
     );
   }

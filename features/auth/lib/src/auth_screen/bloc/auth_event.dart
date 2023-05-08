@@ -24,12 +24,16 @@ class SignInWithGoogleEvent implements AuthEvent {
   SignInWithGoogleEvent();
 }
 
-class UpdateUserRegistrationStatusEvent implements AuthEvent {
-  final bool isUserRegister;
+class UpdateUserRegisteredStatusEvent implements AuthEvent {
+  UpdateUserRegisteredStatusEvent();
+  @override
+  List<Object> get props => [];
+}
 
-  UpdateUserRegistrationStatusEvent({
-    required this.isUserRegister,
-  });
+class UpdateUserNotRegisteredStatusEvent implements AuthEvent {
+  UpdateUserNotRegisteredStatusEvent();
+  @override
+  List<Object> get props => [];
 }
 
 class CheckOfflineModeEvent implements AuthEvent {

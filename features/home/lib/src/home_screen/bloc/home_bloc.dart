@@ -42,6 +42,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     _,
     Emitter<HomeState> emit,
   ) async {
+    print('here');
     emit(
       state.copyWith(
         currentUser: await _userRepository.getCurrent(),
