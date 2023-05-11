@@ -6,7 +6,7 @@ import 'package:home/src/home_screen/bloc/home_bloc.dart';
 import 'package:home/src/home_screen/bloc/home_event.dart';
 import 'package:home/src/home_screen/bloc/home_state.dart';
 
-class HomeDialogWidget extends StatelessWidget {
+class HomeAddDialogWidget extends StatelessWidget {
 
   //todo investigate why we can handle this provider
   @override
@@ -16,17 +16,17 @@ class HomeDialogWidget extends StatelessWidget {
         authRepository: appDependencies.get<AuthRepository>(),
         userRepository: appDependencies.get<UserRepository>(),
       ),
-      child: _HomeDialogWidgetState(),
+      child: _HomeAddDialogWidgetState(),
     );
   }
 }
 
-class _HomeDialogWidgetState extends StatefulWidget {
+class _HomeAddDialogWidgetState extends StatefulWidget {
   @override
-  State<_HomeDialogWidgetState> createState() => _HomeDialogWidgetStateState();
+  State<_HomeAddDialogWidgetState> createState() => _HomeAddDialogWidgetStateState();
 }
 
-class _HomeDialogWidgetStateState extends State<_HomeDialogWidgetState> {
+class _HomeAddDialogWidgetStateState extends State<_HomeAddDialogWidgetState> {
   final TextEditingController _titleController = TextEditingController();
 
   final TextEditingController _descriptionController = TextEditingController();
@@ -179,6 +179,7 @@ class _HomeDialogWidgetStateState extends State<_HomeDialogWidgetState> {
                         child: InkWell(
                           onTap: () {
                             bloc.add(
+                              //todo check this one
                               SubmitDataEvent(
                                 value: Event(
                                   id: '',
@@ -189,6 +190,8 @@ class _HomeDialogWidgetStateState extends State<_HomeDialogWidgetState> {
                                 ),
                               ),
                             );
+                            //todo why null
+                            print('Event ${state.event.toString()}');
                             Navigator.of(context).pop();
                           },
                           child: const Text(

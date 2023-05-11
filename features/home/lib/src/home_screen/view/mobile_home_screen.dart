@@ -35,6 +35,7 @@ class _MobileHomePage extends StatelessWidget {
     final bloc = context.read<HomeBloc>();
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
+        print('state event ${state.event?.length}');
         return Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: AppColors.backgroundHome,
@@ -49,10 +50,11 @@ class _MobileHomePage extends StatelessWidget {
             //todo add logic
             onTap: () {
               showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return HomeDialogWidget();
-                  });
+                context: context,
+                builder: (BuildContext context) {
+                  return HomeAddDialogWidget();
+                },
+              );
             },
           ),
           body: state.isInternetAvailable
@@ -82,6 +84,7 @@ class _MobileHomePage extends StatelessWidget {
                     )
                   : const Center(
                       child: Text(
+                        //todo add loc
                         'Add Event. Press the button bellow',
                         style: AppTextStyle.rubicRegularLoginButton20,
                       ),

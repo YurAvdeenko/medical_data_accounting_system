@@ -12,10 +12,11 @@ class LandingPage extends StatelessWidget {
     final data.User? user = Provider.of<data.User?>(context);
     final bool isLoggedIn = user != null;
     return isLoggedIn ? HomePage() : AuthorizationPage();
+    //todo implement or remove
+        /*return ProvidersBloc(
+      child: isLoggedIn ? HomePage() : AuthorizationPage(),
+    );*/
   }
 }
 
-//todo implement
-/*return ProvidersBloc(
-      child: isLoggedIn ? HomePage() : AuthorizationPage(),
-    );*/
+
