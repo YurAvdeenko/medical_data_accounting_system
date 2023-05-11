@@ -18,5 +18,6 @@ class AppColors {
   static const Color paleBlue = Color(0xFFbdc1ff);
   static const Color onHover = Color(0xFF34397b);
   static const Color red = Color(0xFFB71C1C);
-  static const Color backgroundAuth = Color(0xFF2C2DC4);
+  static const Color backgroundHome = Color(0xFFEFE6F9);
+  static const Color bordersHome = Color(0xFFE0C7FB);
 }

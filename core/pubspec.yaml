@@ -6,3 +6,23 @@ environment:
 
 dependencies:
   get_it: ^7.2.0
+  flutter_bloc: ^8.1.1
+  flutter:
+    sdk: flutter
+
+  data:
+    path: ../data
+  domain:
+    path: ../domain
+  auth:
+    path: ../features/auth
+  home:
+    path: ../features/home
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+flutter:
+
