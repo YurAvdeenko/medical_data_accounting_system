@@ -27,15 +27,19 @@ class MobileHomePage extends StatelessWidget {
   }
 }
 
-class _MobileHomePage extends StatelessWidget {
+class _MobileHomePage extends StatefulWidget {
   _MobileHomePage();
 
+  @override
+  State<_MobileHomePage> createState() => _MobileHomePageState();
+}
+
+class _MobileHomePageState extends State<_MobileHomePage> {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<HomeBloc>();
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        print('state event ${state.event?.length}');
         return Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: AppColors.backgroundHome,
@@ -47,32 +51,47 @@ class _MobileHomePage extends StatelessWidget {
             },
           ),
           floatingActionButton: HomeFloatingActionButton(
-            //todo add logic
             onTap: () {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return HomeAddDialogWidget();
+                  return HomeAddDialogWidget(
+                    submit: (
+                      String doctor,
+                      String illness,
+                      String illnessDescription,
+                      DateTime date,
+                    ) =>
+                        bloc.add(
+                      SubmitDataEvent(
+                        value: Event(
+                          id: '',
+                          doctor: doctor,
+                          illness: illness,
+                          illnessDescription: illnessDescription,
+                          date: date,
+                        ),
+                      ),
+                    ),
+                  );
                 },
               );
             },
           ),
           body: state.isInternetAvailable
-              ? state.event != null
+              ? state.events.isNotEmpty
                   ? Column(
                       children: <Widget>[
                         const SizedBox(height: 10),
                         ListView.separated(
-                          itemCount: state.event!.length,
+                          itemCount: state.events.length,
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 10),
                               child: HomeItemWidget(
-                                doctor: state.event![index].illness,
-                                date: state.event![index].date.toString(),
-                                illness: state.event![index].illness,
-                                illnessDescription: state.event![index].illnessDescription,
+                                event: state.events[index],
+                                delete: () => bloc.add(RemoveDataEvent(index: index)),
                               ),
                             );
                           },

@@ -1,54 +1,21 @@
 import 'package:core_ui/core_ui.dart';
-import 'package:di/di.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:home/src/home_screen/bloc/home_bloc.dart';
 
-class HomeItemDialogWidget extends StatelessWidget {
-  final String doctor;
-  final String illness;
-  final String illnessDescription;
-  final String date;
+class HomeItemDialogWidget extends StatefulWidget {
+  final Event event;
+  final void Function() delete;
 
   HomeItemDialogWidget({
-    required this.doctor,
-    required this.illness,
-    required this.illnessDescription,
-    required this.date,
+    required this.event,
+    required this.delete,
   });
-
-  //todo investigate why we can handle this provider
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider<HomeBloc>(
-      create: (_) => HomeBloc(
-        authRepository: appDependencies.get<AuthRepository>(),
-        userRepository: appDependencies.get<UserRepository>(),
-      ),
-      child: _HomeDialogWidgetState(
-        doctor: doctor,
-        illness: illness,
-        illnessDescription: illnessDescription,
-        date: date,
-      ),
-    );
-  }
+  State<HomeItemDialogWidget> createState() => _HomeItemDialogWidgetState();
 }
 
-class _HomeDialogWidgetState extends StatelessWidget {
-  final String doctor;
-  final String illness;
-  final String illnessDescription;
-  final String date;
-
-  _HomeDialogWidgetState({
-    required this.doctor,
-    required this.illness,
-    required this.illnessDescription,
-    required this.date,
-  });
-
+class _HomeItemDialogWidgetState extends State<HomeItemDialogWidget> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -57,8 +24,6 @@ class _HomeDialogWidgetState extends StatelessWidget {
       ),
       child: SingleChildScrollView(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
               padding: const EdgeInsets.all(10),
@@ -71,10 +36,24 @@ class _HomeDialogWidgetState extends StatelessWidget {
               ),
               child: Row(
                 children: <Widget>[
-                  Text(
-                    //todo add loc
-                    'Your Event - $date',
-                    style: AppTextStyle.rubicRegular20,
+                  const Spacer(flex: 2),
+                  Column(
+                    children: <Widget>[
+                      Text(
+                        //todo add loc
+                        'Your Event',
+                        style: AppTextStyle.rubicRegular20.copyWith(fontSize: 16),
+                      ),
+                      Text(
+                        //todo add loc
+                        '${widget.event.date}',
+                        maxLines: 2,
+                        style: AppTextStyle.rubicRegular20.copyWith(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
                   ),
                   const Spacer(),
                   IconButton(
@@ -84,29 +63,117 @@ class _HomeDialogWidgetState extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        const SizedBox(height: 10.0),
-                        Text(illness),
-                        const SizedBox(height: 10.0),
-                        Text(doctor),
-                        const SizedBox(height: 10.0),
-                        Text(illnessDescription),
-                        const SizedBox(height: 20.0),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: ElevatedButton(
-                            onPressed: () => Navigator.of(context).pop(),
-                            //todo add loc
-                            child: const Text('Back'),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const SizedBox(height: 10.0),
+                  Row(
+                    children: <Widget>[
+                      const Text(
+                        'Doctor: ',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(width: 5),
+                      Expanded(
+                        child: Text(
+                          widget.event.doctor,
+                          maxLines: 2,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
+                  const Divider(color: AppColors.bordersHome, thickness: 1),
+                  // const SizedBox(height: 10.0),
+                  Row(
+                    children: <Widget>[
+                      const Text(
+                        'Illness: ',
+                        maxLines: 2,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(width: 5),
+                      Expanded(
+                        child: Text(
+                          widget.event.illness,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Divider(color: AppColors.bordersHome, thickness: 1),
+                  // const SizedBox(height: 10.0),
+                  Row(
+                    children: <Widget>[
+                      const Text(
+                        'Description: ',
+                        maxLines: 4,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(width: 5),
+                      Expanded(
+                        child: Text(
+                          widget.event.illnessDescription,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Divider(color: AppColors.bordersHome, thickness: 1),
+                  const SizedBox(height: 20.0),
+                  Row(
+                    children: <Widget>[
+                      const Spacer(),
+                      TextButton(
+                        onPressed: () {
+                          widget.delete();
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          'Delete',
+                          style: AppTextStyle.rubicRegular20.copyWith(
+                            fontSize: 16,
+                            color: AppColors.violetSocial,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.violetSocial,
+                        ),
+                        onPressed: () => Navigator.of(context).pop(),
+                        //todo add loc
+                        child: const Text('Back'),
+                      ),
+                    ],
                   ),
                 ],
               ),

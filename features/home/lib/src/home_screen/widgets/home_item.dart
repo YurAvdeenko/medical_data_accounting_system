@@ -1,19 +1,15 @@
 import 'package:core_ui/core_ui.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:home/src/home_screen/widgets/home_item_dialog.dart';
 
 class HomeItemWidget extends StatelessWidget {
-  final String doctor;
-  final String date;
-  final String illness;
-  final String illnessDescription;
+  final Event event;
+  final void Function() delete;
 
   const HomeItemWidget({
     Key? key,
-    required this.doctor,
-    required this.date,
-    required this.illness,
-    required this.illnessDescription,
+    required this.event, required this.delete,
   }) : super(key: key);
 
   @override
@@ -24,16 +20,13 @@ class HomeItemWidget extends StatelessWidget {
           context: context,
           builder: (BuildContext context) {
             return HomeItemDialogWidget(
-              doctor: doctor,
-              illness: '',
-              illnessDescription: '',
-              date: date,
+              event: event,
+              delete: delete,
             );
           },
         );
       },
       child: Container(
-        height: 50,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
@@ -45,20 +38,26 @@ class HomeItemWidget extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              doctor,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
+            Expanded(
+              child: Text(
+                event.doctor,
+                maxLines: 2,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
               ),
             ),
             const Spacer(),
-            Text(
-              date,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.grey,
-                fontSize: 14,
+            Expanded(
+              child: Text(
+                event.date.toString(),
+                maxLines: 2,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                  fontSize: 14,
+                ),
               ),
             ),
           ],

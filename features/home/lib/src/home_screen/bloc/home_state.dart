@@ -7,7 +7,7 @@ class HomeState {
   final String? doctor;
   final String? illnessDescription;
   final DateTime? date;
-  final List<Event>? event;
+  final List<Event> events;
 
   HomeState({
     required this.currentUser,
@@ -16,7 +16,7 @@ class HomeState {
     required this.doctor,
     required this.illnessDescription,
     required this.date,
-    required this.event,
+    required this.events,
   });
 
   factory HomeState.initState() {
@@ -27,7 +27,7 @@ class HomeState {
       doctor: '',
       illnessDescription: '',
       date: null,
-      event: null,
+      events: [],
     );
   }
 
@@ -38,7 +38,7 @@ class HomeState {
     String? doctor,
     String? illnessDescription,
     DateTime? date,
-    List<Event>? event,
+    List<Event>? events,
   }) {
     return HomeState(
       currentUser: currentUser ?? this.currentUser,
@@ -47,7 +47,7 @@ class HomeState {
       doctor: doctor ?? this.doctor,
       illnessDescription: illnessDescription ?? this.illnessDescription,
       date: date ?? this.date,
-      event: event ?? this.event,
+      events: events ?? this.events,
     );
   }
 
@@ -58,6 +58,6 @@ class HomeState {
         doctor,
         illnessDescription,
         date,
-        event,
+        events,
       ];
 }

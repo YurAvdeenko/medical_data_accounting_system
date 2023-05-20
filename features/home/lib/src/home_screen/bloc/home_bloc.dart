@@ -18,11 +18,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<GetUser>(_onGetUser);
     on<Logout>(_onLogout);
     on<CheckOfflineMode>(_onCheckOfflineMode);
-    on<EnterDoctorEvent>(_onEnterDoctorEvent);
-    on<EnterIllnessEvent>(_onEnterIllnessEvent);
-    on<EnterIllnessDescriptionEvent>(_onEnterIllnessDescriptionEvent);
-    on<EnterDateEvent>(_onEnterDataEvent);
     on<SubmitDataEvent>(_onSubmitDataEvent);
+    on<RemoveDataEvent>(_onRemoveDataEvent);
 
     _connectivity.onConnectivityChanged.listen(
       (event) {
@@ -72,50 +69,27 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     );
   }
 
-  void _onEnterDoctorEvent(
-    EnterDoctorEvent event,
-    Emitter<HomeState> emit,
-  ) {
-    emit(state.copyWith(doctor: event.value));
-  }
-
-  void _onEnterIllnessEvent(
-    EnterIllnessEvent event,
-    Emitter<HomeState> emit,
-  ) {
-    emit(state.copyWith(illness: event.value));
-  }
-
-  void _onEnterIllnessDescriptionEvent(
-    EnterIllnessDescriptionEvent event,
-    Emitter<HomeState> emit,
-  ) {
-    emit(state.copyWith(illnessDescription: event.value));
-  }
-
-  void _onEnterDataEvent(
-    EnterDateEvent event,
-    Emitter<HomeState> emit,
-  ) {
-    emit(state.copyWith(date: event.value));
-  }
-
   void _onSubmitDataEvent(
     SubmitDataEvent event,
     Emitter<HomeState> emit,
   ) {
+    List<Event> currentEvents = <Event>[...state.events];
+
+    currentEvents.add(event.value);
     emit(
-      state.copyWith(
-        event: <Event>[
-          Event(
-            id: event.value!.id,
-            doctor: event.value!.doctor,
-            illness: event.value!.illness,
-            illnessDescription: event.value!.illnessDescription,
-            date: event.value!.date,
-          ),
-        ],
-      ),
+      state.copyWith(events: currentEvents),
+    );
+  }
+
+  void _onRemoveDataEvent(
+      RemoveDataEvent event,
+    Emitter<HomeState> emit,
+  ) {
+    List<Event> currentEvents = <Event>[...state.events];
+
+    currentEvents.removeAt(event.index);
+    emit(
+      state.copyWith(events: currentEvents),
     );
   }
 }
