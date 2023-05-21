@@ -1,6 +1,7 @@
 import 'package:domain/domain.dart';
+import 'package:equatable/equatable.dart';
 
-class HomeState {
+class HomeState extends Equatable {
   final User? currentUser;
   final bool isInternetAvailable;
   final String? illness;

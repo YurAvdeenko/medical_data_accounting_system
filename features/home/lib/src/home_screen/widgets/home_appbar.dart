@@ -17,9 +17,9 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(title),
       centerTitle: true,
       backgroundColor: AppColors.violetSocial,
-      actions: [
+      actions: <Widget>[
         IconButton(
-          icon: const Icon(Icons.logout),
+          icon: const Icon(Icons.logout, size: 20),
           onPressed: onSignOut,
         ),
       ],

@@ -2,7 +2,6 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
 class HomeAddDialogWidget extends StatefulWidget {
-
   final void Function(
     String doctor,
     String illness,
@@ -17,7 +16,6 @@ class HomeAddDialogWidget extends StatefulWidget {
 }
 
 class _HomeAddDialogWidgetState extends State<HomeAddDialogWidget> {
-
   final TextEditingController _doctorController = TextEditingController();
   final TextEditingController _illnessController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
@@ -122,12 +120,18 @@ class _HomeAddDialogWidgetState extends State<HomeAddDialogWidget> {
                         cursorColor: AppColors.darkBlue,
                         decoration: InputDecoration(
                           labelText: 'Date',
-                          labelStyle: AppTextStyle.rubicRegular12.copyWith(color: AppColors.darkBlue),
+                          labelStyle: AppTextStyle.rubicRegular12.copyWith(
+                            color: AppColors.darkBlue,
+                          ),
                           enabledBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(color: AppColors.backgroundHome),
+                            borderSide: BorderSide(
+                              color: AppColors.backgroundHome,
+                            ),
                           ),
                           focusedBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(color: AppColors.darkBlue),
+                            borderSide: BorderSide(
+                              color: AppColors.darkBlue,
+                            ),
                           ),
                         ),
                         controller: TextEditingController(
@@ -148,7 +152,7 @@ class _HomeAddDialogWidgetState extends State<HomeAddDialogWidget> {
                     width: 80,
                     decoration: BoxDecoration(
                       color: AppColors.violetSocial,
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                     padding: const EdgeInsets.all(10),
                     child: InkWell(
@@ -159,7 +163,6 @@ class _HomeAddDialogWidgetState extends State<HomeAddDialogWidget> {
                           _descriptionController.text,
                           _selectedDate,
                         );
-
                         Navigator.of(context).pop();
                       },
                       child: const Text(
@@ -170,7 +173,6 @@ class _HomeAddDialogWidgetState extends State<HomeAddDialogWidget> {
                     ),
                   ),
                 ),
-                // const Spacer(),
               ],
             ),
           ],
@@ -183,8 +185,25 @@ class _HomeAddDialogWidgetState extends State<HomeAddDialogWidget> {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: _selectedDate,
-      firstDate: DateTime(2020),
-      lastDate: DateTime(2025),
+      firstDate: DateTime(2019),
+      lastDate: DateTime(2030),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: AppColors.violetSocial,
+              onPrimary: AppColors.white,
+              onSurface: AppColors.violetSocial,
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                surfaceTintColor: AppColors.violetSocial,
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
     if (picked != null && picked != _selectedDate) {
       setState(() {

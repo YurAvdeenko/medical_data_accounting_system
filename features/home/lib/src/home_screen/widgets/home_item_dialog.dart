@@ -42,15 +42,18 @@ class _HomeItemDialogWidgetState extends State<HomeItemDialogWidget> {
                       Text(
                         //todo add loc
                         'Your Event',
-                        style: AppTextStyle.rubicRegular20.copyWith(fontSize: 16),
+                        style: AppTextStyle.rubicRegular20.copyWith(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
+                      const SizedBox(height: 5),
                       Text(
                         //todo add loc
-                        '${widget.event.date}',
+                        '${widget.event.date?.day}/${widget.event.date?.month}/${widget.event.date?.year} at ${widget.event.date?.hour}:${widget.event.date?.minute}',
                         maxLines: 2,
                         style: AppTextStyle.rubicRegular20.copyWith(
                           fontSize: 16,
-                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ],
@@ -75,11 +78,11 @@ class _HomeItemDialogWidgetState extends State<HomeItemDialogWidget> {
                   const SizedBox(height: 10.0),
                   Row(
                     children: <Widget>[
-                      const Text(
+                      //todo add loc
+                      Text(
                         'Doctor: ',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                        style: AppTextStyle.rubicRegular12.copyWith(
+                          color: AppColors.darkBlue,
                         ),
                       ),
                       const SizedBox(width: 5),
@@ -87,91 +90,96 @@ class _HomeItemDialogWidgetState extends State<HomeItemDialogWidget> {
                         child: Text(
                           widget.event.doctor,
                           maxLines: 2,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.grey,
+                          style: AppTextStyle.rubicRegularHint15.copyWith(
+                            color: AppColors.darkBlue,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const Divider(color: AppColors.bordersHome, thickness: 1),
-                  // const SizedBox(height: 10.0),
+                  const Divider(color: AppColors.bordersHome, thickness: 1, height: 30),
                   Row(
                     children: <Widget>[
-                      const Text(
+                      //todo add loc
+                      Text(
                         'Illness: ',
                         maxLines: 2,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                        style: AppTextStyle.rubicRegular12.copyWith(
+                          color: AppColors.darkBlue,
                         ),
                       ),
                       const SizedBox(width: 5),
                       Expanded(
                         child: Text(
                           widget.event.illness,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.grey,
+                          style: AppTextStyle.rubicRegularHint15.copyWith(
+                            color: AppColors.darkBlue,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const Divider(color: AppColors.bordersHome, thickness: 1),
-                  // const SizedBox(height: 10.0),
+                  const Divider(color: AppColors.bordersHome, thickness: 1, height: 30),
                   Row(
                     children: <Widget>[
-                      const Text(
+                      //todo add loc
+                      Text(
                         'Description: ',
                         maxLines: 4,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                        style: AppTextStyle.rubicRegular12.copyWith(
+                          color: AppColors.darkBlue,
                         ),
                       ),
                       const SizedBox(width: 5),
                       Expanded(
                         child: Text(
                           widget.event.illnessDescription,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.grey,
+                          style: AppTextStyle.rubicRegularHint15.copyWith(
+                            color: AppColors.darkBlue,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const Divider(color: AppColors.bordersHome, thickness: 1),
+                  const Divider(color: AppColors.bordersHome, thickness: 1, height: 30),
                   const SizedBox(height: 20.0),
                   Row(
                     children: <Widget>[
                       const Spacer(),
-                      TextButton(
-                        onPressed: () {
+                      InkWell(
+                        onTap: () {
                           widget.delete();
                           Navigator.of(context).pop();
                         },
                         child: Text(
+                          //todo add loc
                           'Delete',
-                          style: AppTextStyle.rubicRegular20.copyWith(
-                            fontSize: 16,
+                          style: AppTextStyle.rubicRegular12.copyWith(
                             color: AppColors.violetSocial,
                           ),
                         ),
                       ),
                       const SizedBox(width: 20),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.violetSocial,
+                      Container(
+                        width: 60,
+                        decoration: BoxDecoration(
+                          color: AppColors.violetSocial,
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                        onPressed: () => Navigator.of(context).pop(),
-                        //todo add loc
-                        child: const Text('Back'),
+                        padding: const EdgeInsets.all(10),
+                        child: InkWell(
+                          onTap: () {
+                            widget.delete();
+                            Navigator.of(context).pop();
+                          },
+                          child: const Center(
+                            child: Text(
+                              //todo add loc
+                              'Back',
+                              style: AppTextStyle.rubicRegular12,
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),

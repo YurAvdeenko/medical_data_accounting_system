@@ -9,7 +9,8 @@ class HomeItemWidget extends StatelessWidget {
 
   const HomeItemWidget({
     Key? key,
-    required this.event, required this.delete,
+    required this.event,
+    required this.delete,
   }) : super(key: key);
 
   @override
@@ -42,22 +43,18 @@ class HomeItemWidget extends StatelessWidget {
               child: Text(
                 event.doctor,
                 maxLines: 2,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
+                style: AppTextStyle.rubicRegular12.copyWith(
+                  color: AppColors.darkBlue,
                   fontSize: 16,
                 ),
               ),
             ),
             const Spacer(),
-            Expanded(
-              child: Text(
-                event.date.toString(),
-                maxLines: 2,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey,
-                  fontSize: 14,
-                ),
+            Text(
+              '${event.date?.day}/${event.date?.month}/${event.date?.year}',
+              maxLines: 2,
+              style: AppTextStyle.rubicRegularHint15.copyWith(
+                color: AppColors.darkBlue,
               ),
             ),
           ],
