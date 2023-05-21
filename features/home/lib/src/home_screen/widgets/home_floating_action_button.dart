@@ -11,8 +11,10 @@ class HomeFloatingActionButton extends StatelessWidget {
     return FloatingActionButton.extended(
       onPressed: onTap,
       backgroundColor: AppColors.violetSocial,
-      //todo add loc
-      label: const Text('Add new event'),
+      label: Text(
+        'general.add_new_event'.tr(),
+        style: AppTextStyle.rubicRegular12.copyWith(fontSize: 16),
+      ),
       icon: const Icon(Icons.add),
     );
   }

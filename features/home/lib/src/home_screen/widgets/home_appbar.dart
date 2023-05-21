@@ -14,7 +14,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title),
+      title: Text(title, style: AppTextStyle.rubicRegular20),
       centerTitle: true,
       backgroundColor: AppColors.violetSocial,
       actions: <Widget>[

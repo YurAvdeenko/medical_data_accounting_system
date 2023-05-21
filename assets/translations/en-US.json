@@ -15,6 +15,17 @@
     "logout": "Log out",
     "cant_be_empty": "Can't be empty",
     "too_short": "Too short",
-    "no_internet_connection": "No internet connection"
+    "no_internet_connection": "No internet connection",
+    "medical_data_accounting_system": "Medical data accounting system",
+    "press_the_button_bellow_message": "Add Event - Press the button bellow",
+    "add_new_event": "Add new event",
+    "new_event": "New Event",
+    "your_event": "Your Event",
+    "doctor": "Doctor: ",
+    "illness": "Illness:",
+    "description": "Description: ",
+    "add_event": "Add event",
+    "delete": "Delete",
+    "back": "Back"
   }
 }

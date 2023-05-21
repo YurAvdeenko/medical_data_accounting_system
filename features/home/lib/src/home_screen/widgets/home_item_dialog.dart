@@ -40,8 +40,7 @@ class _HomeItemDialogWidgetState extends State<HomeItemDialogWidget> {
                   Column(
                     children: <Widget>[
                       Text(
-                        //todo add loc
-                        'Your Event',
+                        'general.your_event'.tr(),
                         style: AppTextStyle.rubicRegular20.copyWith(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -49,7 +48,6 @@ class _HomeItemDialogWidgetState extends State<HomeItemDialogWidget> {
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        //todo add loc
                         '${widget.event.date?.day}/${widget.event.date?.month}/${widget.event.date?.year} at ${widget.event.date?.hour}:${widget.event.date?.minute}',
                         maxLines: 2,
                         style: AppTextStyle.rubicRegular20.copyWith(
@@ -78,9 +76,8 @@ class _HomeItemDialogWidgetState extends State<HomeItemDialogWidget> {
                   const SizedBox(height: 10.0),
                   Row(
                     children: <Widget>[
-                      //todo add loc
                       Text(
-                        'Doctor: ',
+                        'general.doctor'.tr(),
                         style: AppTextStyle.rubicRegular12.copyWith(
                           color: AppColors.darkBlue,
                         ),
@@ -100,9 +97,8 @@ class _HomeItemDialogWidgetState extends State<HomeItemDialogWidget> {
                   const Divider(color: AppColors.bordersHome, thickness: 1, height: 30),
                   Row(
                     children: <Widget>[
-                      //todo add loc
                       Text(
-                        'Illness: ',
+                        'general.illness'.tr(),
                         maxLines: 2,
                         style: AppTextStyle.rubicRegular12.copyWith(
                           color: AppColors.darkBlue,
@@ -122,9 +118,8 @@ class _HomeItemDialogWidgetState extends State<HomeItemDialogWidget> {
                   const Divider(color: AppColors.bordersHome, thickness: 1, height: 30),
                   Row(
                     children: <Widget>[
-                      //todo add loc
                       Text(
-                        'Description: ',
+                        'general.description'.tr(),
                         maxLines: 4,
                         style: AppTextStyle.rubicRegular12.copyWith(
                           color: AppColors.darkBlue,
@@ -152,8 +147,7 @@ class _HomeItemDialogWidgetState extends State<HomeItemDialogWidget> {
                           Navigator.of(context).pop();
                         },
                         child: Text(
-                          //todo add loc
-                          'Delete',
+                          'general.delete'.tr(),
                           style: AppTextStyle.rubicRegular12.copyWith(
                             color: AppColors.violetSocial,
                           ),
@@ -172,10 +166,9 @@ class _HomeItemDialogWidgetState extends State<HomeItemDialogWidget> {
                             widget.delete();
                             Navigator.of(context).pop();
                           },
-                          child: const Center(
+                          child: Center(
                             child: Text(
-                              //todo add loc
-                              'Back',
+                              'general.back'.tr(),
                               style: AppTextStyle.rubicRegular12,
                             ),
                           ),

@@ -44,8 +44,7 @@ class _MobileHomePageState extends State<_MobileHomePage> {
           resizeToAvoidBottomInset: false,
           backgroundColor: AppColors.backgroundHome,
           appBar: HomeAppBar(
-            //todo add loc
-            title: 'Medical data accounting system',
+            title: 'general.medical_data_accounting_system'.tr(),
             onSignOut: () {
               bloc.add(Logout());
             },
@@ -101,11 +100,10 @@ class _MobileHomePageState extends State<_MobileHomePage> {
                         )
                       ],
                     )
-                  : const Center(
+                  : Center(
                       child: Text(
-                        //todo add loc
-                        'Add Event. Press the button bellow',
-                        style: AppTextStyle.rubicRegularLoginButton20,
+                        'general.press_the_button_bellow_message'.tr(),
+                        style: AppTextStyle.rubicRegular20.copyWith(color: AppColors.darkBlue),
                       ),
                     )
               : OfflineNotificationDialog(),

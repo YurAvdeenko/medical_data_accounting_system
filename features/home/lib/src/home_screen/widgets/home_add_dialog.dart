@@ -44,9 +44,8 @@ class _HomeAddDialogWidgetState extends State<HomeAddDialogWidget> {
               child: Row(
                 children: <Widget>[
                   const Spacer(flex: 2),
-                  const Text(
-                    //todo add loc
-                    'New Event',
+                  Text(
+                    'general.new_event'.tr(),
                     style: AppTextStyle.rubicRegular20,
                   ),
                   const Spacer(),
@@ -165,9 +164,8 @@ class _HomeAddDialogWidgetState extends State<HomeAddDialogWidget> {
                         );
                         Navigator.of(context).pop();
                       },
-                      child: const Text(
-                        //todo add loc
-                        'Add event',
+                      child: Text(
+                        'general.add_event'.tr(),
                         style: AppTextStyle.rubicRegular12,
                       ),
                     ),
