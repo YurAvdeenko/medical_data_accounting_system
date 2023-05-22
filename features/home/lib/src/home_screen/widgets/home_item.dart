@@ -41,7 +41,7 @@ class HomeItemWidget extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Text(
-                event.doctor,
+                event.illness,
                 maxLines: 2,
                 style: AppTextStyle.rubicRegular12.copyWith(
                   color: AppColors.darkBlue,
