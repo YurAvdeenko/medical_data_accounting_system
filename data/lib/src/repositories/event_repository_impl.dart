@@ -35,6 +35,12 @@ class EventRepositoryImpl implements domain.EventRepository {
     );
   }
 
+  @override
+  Future<domain.Event?> uploadNewEvent(domain.EventParams params) {
+    // TODO: implement uploadNewEvent
+    throw UnimplementedError();
+  }
+
   //todo handle this one
   // @override
   // Future<domain.Event?> uploadNewEvent(domain.EventParams params) async {
