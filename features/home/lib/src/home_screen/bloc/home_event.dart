@@ -24,6 +24,12 @@ class RemoveDataEvent implements HomeEvent {
   RemoveDataEvent({required this.index});
 }
 
+class EventsUpdated implements HomeEvent {
+  final List<Event> allEvents;
+
+  EventsUpdated({required this.allEvents});
+}
+
 class GetUser implements HomeEvent {}
 
 class Logout implements HomeEvent {}

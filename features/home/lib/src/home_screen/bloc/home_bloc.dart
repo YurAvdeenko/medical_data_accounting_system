@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,19 +9,24 @@ import 'package:home/src/home_screen/bloc/home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final UserRepository _userRepository;
   final AuthRepository _authRepository;
+  final EventRepository _eventRepository;
   final Connectivity _connectivity = Connectivity();
+  StreamSubscription<Future<List<Event>>>? allEventsListener;
 
   HomeBloc({
     required AuthRepository authRepository,
     required UserRepository userRepository,
+    required EventRepository eventRepository,
   })  : _authRepository = authRepository,
         _userRepository = userRepository,
+        _eventRepository = eventRepository,
         super(HomeState.initState()) {
     on<GetUser>(_onGetUser);
     on<Logout>(_onLogout);
     on<CheckOfflineMode>(_onCheckOfflineMode);
     on<SubmitDataEvent>(_onSubmitDataEvent);
     on<RemoveDataEvent>(_onRemoveDataEvent);
+    on<EventsUpdated>(_onEventsUpdated);
 
     _connectivity.onConnectivityChanged.listen(
       (event) {
@@ -36,6 +43,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             ),
           );
         }
+      },
+    );
+
+    allEventsListener = _eventRepository.getCurrentEvents().listen(
+      (Future<List<Event>> eventActivities) async {
+        add(
+          EventsUpdated(
+            allEvents: await eventActivities,
+          ),
+        );
       },
     );
   }
@@ -82,7 +99,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   void _onRemoveDataEvent(
-      RemoveDataEvent event,
+    RemoveDataEvent event,
     Emitter<HomeState> emit,
   ) {
     List<Event> currentEvents = <Event>[...state.events];
@@ -91,5 +108,24 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(
       state.copyWith(events: currentEvents),
     );
+  }
+
+  void _onEventsUpdated(
+    EventsUpdated event,
+    Emitter<HomeState> emit,
+  ) {
+    List<Event> currentEvents = <Event>[...state.events];
+
+    currentEvents.addAll(event.allEvents);
+    emit(
+      state.copyWith(events: currentEvents),
+    );
+  }
+
+  @override
+  Future<void> close() async {
+    allEventsListener?.cancel();
+    allEventsListener = null;
+    super.close();
   }
 }

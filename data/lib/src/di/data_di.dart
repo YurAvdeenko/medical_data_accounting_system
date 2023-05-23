@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:data/data.dart';
+import 'package:data/src/providers/firebase/event_firebase_provider.dart';
 import 'package:data/src/providers/firebase/user_firebase_provider.dart';
 import 'package:data/src/providers/user_provider.dart';
 import 'package:data/src/repositories/user_repository_impl.dart';
@@ -27,6 +28,9 @@ class DataDi {
     _serviceLocator.registerLazySingleton<AuthProvider>(
       () => AuthProvider(),
     );
+    _serviceLocator.registerLazySingleton<EventProvider>(
+      () => EventFirebaseProvider(),
+    );
   }
 
   void _initRepositories() {
@@ -39,6 +43,12 @@ class DataDi {
       () => AuthRepositoryImpl(
         userProvider: _serviceLocator.get(),
         authProvider: _serviceLocator.get(),
+      ),
+    );
+    _serviceLocator.registerLazySingleton<EventRepository>(
+      () => EventRepositoryImpl(
+        eventProvider: _serviceLocator.get(),
+        userProvider: _serviceLocator.get(),
       ),
     );
   }

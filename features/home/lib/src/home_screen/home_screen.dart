@@ -16,6 +16,7 @@ class HomePage extends StatelessWidget {
       create: (context) => HomeBloc(
         userRepository: appDependencies.get<UserRepository>(),
         authRepository: appDependencies.get<AuthRepository>(),
+        eventRepository: appDependencies.get<EventRepository>(),
       )..add(GetUser()),
       child: const _HomePage(),
     );

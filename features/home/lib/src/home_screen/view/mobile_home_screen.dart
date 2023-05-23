@@ -21,6 +21,7 @@ class MobileHomePage extends StatelessWidget {
       create: (_) => HomeBloc(
         authRepository: appDependencies.get<AuthRepository>(),
         userRepository: appDependencies.get<UserRepository>(),
+        eventRepository: appDependencies.get<EventRepository>(),
       ),
       child: _MobileHomePage(),
     );
@@ -64,7 +65,7 @@ class _MobileHomePageState extends State<_MobileHomePage> {
                         bloc.add(
                       SubmitDataEvent(
                         value: Event(
-                          id: '',
+                          id: bloc.state.currentUser?.id ?? '',
                           doctor: doctor,
                           illness: illness,
                           illnessDescription: illnessDescription,
