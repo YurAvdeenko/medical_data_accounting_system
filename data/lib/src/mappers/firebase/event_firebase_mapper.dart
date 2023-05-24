@@ -19,11 +19,12 @@ class EventFirebaseToDataMapper {
       FIELD_EVENT_DATE,
     }.every((String field) => map.keys.contains(field))) {
       return data.Event(
-        id: map[FIELD_EVENT_USER_ID] as String,
+        id: id,
+        userId:  map[FIELD_EVENT_USER_ID] as String,
         doctor: map[FIELD_EVENT_DOCTOR] as String,
         illness: map[FIELD_EVENT_ILLNESS] as String,
         illnessDescription: map[FIELD_EVENT_ILLNESS_DESCRIPTION] as String,
-        date: map[FIELD_EVENT_DOCTOR] as DateTime,
+        date: map[FIELD_EVENT_DATE] as String,
       );
     } else {
       throw Exception('Missing keys (${<String>{

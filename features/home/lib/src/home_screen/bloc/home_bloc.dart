@@ -11,7 +11,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final AuthRepository _authRepository;
   final EventRepository _eventRepository;
   final Connectivity _connectivity = Connectivity();
-  StreamSubscription<Future<List<Event>>>? allEventsListener;
+  StreamSubscription<Future<List<Event>>>? _allEventsListener;
 
   HomeBloc({
     required AuthRepository authRepository,
@@ -21,13 +21,21 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         _userRepository = userRepository,
         _eventRepository = eventRepository,
         super(HomeState.initState()) {
-    on<GetUser>(_onGetUser);
     on<Logout>(_onLogout);
     on<CheckOfflineMode>(_onCheckOfflineMode);
     on<SubmitDataEvent>(_onSubmitDataEvent);
-    on<RemoveDataEvent>(_onRemoveDataEvent);
+    on<RemoveEvent>(_onRemoveEvent);
     on<EventsUpdated>(_onEventsUpdated);
+    on<UploadEvent>(_onUploadEvent);
+    on<Init>(_onInit);
 
+    add(const Init());
+  }
+
+  Future<void> _onInit(
+    _,
+    Emitter<HomeState> emit,
+  ) async {
     _connectivity.onConnectivityChanged.listen(
       (event) {
         if (event == ConnectivityResult.none) {
@@ -46,7 +54,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       },
     );
 
-    allEventsListener = _eventRepository.getCurrentEvents().listen(
+    _allEventsListener ??= _eventRepository.observeAll().listen(
       (Future<List<Event>> eventActivities) async {
         add(
           EventsUpdated(
@@ -55,15 +63,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         );
       },
     );
-  }
 
-  Future<void> _onGetUser(
-    _,
-    Emitter<HomeState> emit,
-  ) async {
+    final User user = await _userRepository.getCurrent();
+
     emit(
       state.copyWith(
-        currentUser: await _userRepository.getCurrent(),
+        currentUser: user,
       ),
     );
   }
@@ -98,34 +103,47 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     );
   }
 
-  void _onRemoveDataEvent(
-    RemoveDataEvent event,
-    Emitter<HomeState> emit,
-  ) {
-    List<Event> currentEvents = <Event>[...state.events];
-
-    currentEvents.removeAt(event.index);
-    emit(
-      state.copyWith(events: currentEvents),
-    );
+  Future<void> _onRemoveEvent(
+    RemoveEvent event,
+    _,
+  ) async {
+    await _eventRepository.deleteById(event.eventId);
   }
 
   void _onEventsUpdated(
     EventsUpdated event,
     Emitter<HomeState> emit,
   ) {
-    List<Event> currentEvents = <Event>[...state.events];
-
-    currentEvents.addAll(event.allEvents);
     emit(
-      state.copyWith(events: currentEvents),
+      state.copyWith(
+        events: event.allEvents,
+        isLoading: false,
+      ),
+    );
+  }
+
+  Future<void> _onUploadEvent(
+    UploadEvent event,
+    Emitter<HomeState> emit,
+  ) async {
+    final User? user = state.currentUser;
+    if (user == null) return;
+
+    await _eventRepository.uploadNewEvent(
+      EventParams(
+        userId: user.id,
+        doctor: event.doctor,
+        illness: event.illness,
+        illnessDescription: event.illnessDescription,
+        date: event.date,
+      ),
     );
   }
 
   @override
   Future<void> close() async {
-    allEventsListener?.cancel();
-    allEventsListener = null;
+    _allEventsListener?.cancel();
+    _allEventsListener = null;
     super.close();
   }
 }

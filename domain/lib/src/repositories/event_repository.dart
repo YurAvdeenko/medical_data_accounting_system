@@ -1,20 +1,22 @@
 import 'package:domain/domain.dart';
 
 abstract class EventRepository {
-  Stream<Future<List<Event>>> getCurrentEvents();
+  Stream<Future<List<Event>>> observeAll();
 
-  Future<Event?> uploadNewEvent(EventParams params);
+  Future<void> deleteById(String eventId);
+
+  Future<void> uploadNewEvent(EventParams params);
 }
 
 class EventParams {
-  final String id;
+  final String userId;
   final String doctor;
   final String illness;
   final String illnessDescription;
   final DateTime? date;
 
   EventParams({
-    required this.id,
+    required this.userId,
     required this.doctor,
     required this.illness,
     required this.illnessDescription,

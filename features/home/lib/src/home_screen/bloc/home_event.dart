@@ -18,10 +18,10 @@ class SubmitDataEvent implements HomeEvent {
   SubmitDataEvent({required this.value});
 }
 
-class RemoveDataEvent implements HomeEvent {
-  final int index;
+class RemoveEvent implements HomeEvent {
+  final String eventId;
 
-  RemoveDataEvent({required this.index});
+  RemoveEvent({required this.eventId});
 }
 
 class EventsUpdated implements HomeEvent {
@@ -30,6 +30,22 @@ class EventsUpdated implements HomeEvent {
   EventsUpdated({required this.allEvents});
 }
 
-class GetUser implements HomeEvent {}
-
 class Logout implements HomeEvent {}
+
+class UploadEvent implements HomeEvent {
+  final String doctor;
+  final String illness;
+  final String illnessDescription;
+  final DateTime date;
+
+  UploadEvent({
+    required this.doctor,
+    required this.illness,
+    required this.illnessDescription,
+    required this.date,
+  });
+}
+
+class Init implements HomeEvent {
+  const Init();
+}

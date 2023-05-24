@@ -9,6 +9,7 @@ class HomeState extends Equatable {
   final String? illnessDescription;
   final DateTime? date;
   final List<Event> events;
+  final bool isLoading;
 
   HomeState({
     required this.currentUser,
@@ -18,6 +19,7 @@ class HomeState extends Equatable {
     required this.illnessDescription,
     required this.date,
     required this.events,
+    required this.isLoading,
   });
 
   factory HomeState.initState() {
@@ -29,6 +31,7 @@ class HomeState extends Equatable {
       illnessDescription: '',
       date: null,
       events: [],
+      isLoading: true,
     );
   }
 
@@ -40,6 +43,7 @@ class HomeState extends Equatable {
     String? illnessDescription,
     DateTime? date,
     List<Event>? events,
+    bool? isLoading,
   }) {
     return HomeState(
       currentUser: currentUser ?? this.currentUser,
@@ -49,6 +53,7 @@ class HomeState extends Equatable {
       illnessDescription: illnessDescription ?? this.illnessDescription,
       date: date ?? this.date,
       events: events ?? this.events,
+      isLoading: isLoading ?? this.isLoading,
     );
   }
 
@@ -60,5 +65,6 @@ class HomeState extends Equatable {
         illnessDescription,
         date,
         events,
+        isLoading,
       ];
 }

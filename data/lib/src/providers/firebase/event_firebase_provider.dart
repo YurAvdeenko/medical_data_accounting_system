@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data/src/mappers/firebase/event_firebase_mapper.dart';
 import 'package:data/src/model/event.dart' as data;
 import 'package:data/src/providers/event_provider.dart';
+import 'package:intl/intl.dart';
 
 const String COLLECTION_EVENT = 'event';
 
@@ -18,13 +19,13 @@ class EventFirebaseProvider implements EventProvider {
         'doctor': doctor,
         'illness': illness,
         'illness_description': illnessDescription,
-        'date': date,
+        'date': DateFormat('MMM dd, yyyy, HH:mm').format(date),
       },
     );
   }
 
   @override
-  Stream<List<data.Event>> getCurrentEvents(String userId) {
+  Stream<List<data.Event>> observeAllByUserId(String userId) {
     return _fireStore.collection(COLLECTION_EVENT).snapshots().map(
       (QuerySnapshot<Map<String, dynamic>> event) {
         return event.docs
@@ -45,5 +46,10 @@ class EventFirebaseProvider implements EventProvider {
             .toList();
       },
     );
+  }
+
+  @override
+  Future<void> deleteById(String eventId)  {
+    return _fireStore.collection(COLLECTION_EVENT).doc(eventId).delete();
   }
 }

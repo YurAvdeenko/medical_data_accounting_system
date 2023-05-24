@@ -1,5 +1,4 @@
 import 'package:core_ui/core_ui.dart';
-import 'package:di/di.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:home/src/home_screen/bloc/home_bloc.dart';
@@ -11,31 +10,6 @@ import 'package:home/src/home_screen/widgets/home_floating_action_button.dart';
 import 'package:home/src/home_screen/widgets/home_item.dart';
 
 class MobileHomePage extends StatelessWidget {
-  MobileHomePage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider<HomeBloc>(
-      create: (_) => HomeBloc(
-        authRepository: appDependencies.get<AuthRepository>(),
-        userRepository: appDependencies.get<UserRepository>(),
-        eventRepository: appDependencies.get<EventRepository>(),
-      ),
-      child: _MobileHomePage(),
-    );
-  }
-}
-
-class _MobileHomePage extends StatefulWidget {
-  _MobileHomePage();
-
-  @override
-  State<_MobileHomePage> createState() => _MobileHomePageState();
-}
-
-class _MobileHomePageState extends State<_MobileHomePage> {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<HomeBloc>();
@@ -63,14 +37,11 @@ class _MobileHomePageState extends State<_MobileHomePage> {
                       DateTime date,
                     ) =>
                         bloc.add(
-                      SubmitDataEvent(
-                        value: Event(
-                          id: bloc.state.currentUser?.id ?? '',
-                          doctor: doctor,
-                          illness: illness,
-                          illnessDescription: illnessDescription,
-                          date: date,
-                        ),
+                      UploadEvent(
+                        doctor: doctor,
+                        illness: illness,
+                        illnessDescription: illnessDescription,
+                        date: date,
                       ),
                     ),
                   );
@@ -87,11 +58,12 @@ class _MobileHomePageState extends State<_MobileHomePage> {
                           itemCount: state.events.length,
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int index) {
+                            final Event event = state.events[index];
                             return Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 10),
                               child: HomeItemWidget(
-                                event: state.events[index],
-                                delete: () => bloc.add(RemoveDataEvent(index: index)),
+                                event: event,
+                                delete: () => bloc.add(RemoveEvent(eventId: event.id)),
                               ),
                             );
                           },

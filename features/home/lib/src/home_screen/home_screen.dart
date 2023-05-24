@@ -3,7 +3,6 @@ import 'package:di/di.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:home/src/home_screen/bloc/home_bloc.dart';
-import 'package:home/src/home_screen/bloc/home_event.dart';
 import 'package:home/src/home_screen/bloc/home_state.dart';
 import 'package:home/src/home_screen/view/mobile_home_screen.dart';
 
@@ -17,7 +16,7 @@ class HomePage extends StatelessWidget {
         userRepository: appDependencies.get<UserRepository>(),
         authRepository: appDependencies.get<AuthRepository>(),
         eventRepository: appDependencies.get<EventRepository>(),
-      )..add(GetUser()),
+      ),
       child: const _HomePage(),
     );
   }
@@ -33,7 +32,7 @@ class _HomePage extends StatelessWidget {
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           final User? currentUser = state.currentUser;
-          if (currentUser == null) {
+          if (currentUser == null || state.isLoading) {
             return const AppProgressIndicator();
           } else {
             return MobileHomePage();
