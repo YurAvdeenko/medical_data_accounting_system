@@ -106,21 +106,21 @@ class _MobileAuthorizationPage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(width: AppDimensions.padding10),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(AppDimensions.borderRadius16),
-                                        color: AppColors.white,
-                                      ),
-                                      child: IconButton(
-                                        onPressed: () => bloc.add(SignInWithFacebookEvent()),
-                                        icon: Image.asset(
-                                          'assets/images/facebook_logo.png',
-                                          height: AppDimensions.imageSize40,
-                                          width: AppDimensions.imageSize40,
-                                        ),
-                                      ),
-                                    ),
+                                    // const SizedBox(width: AppDimensions.padding10),
+                                    // Container(
+                                    //   decoration: BoxDecoration(
+                                    //     borderRadius: BorderRadius.circular(AppDimensions.borderRadius16),
+                                    //     color: AppColors.white,
+                                    //   ),
+                                    //   child: IconButton(
+                                    //     onPressed: () => bloc.add(SignInWithFacebookEvent()),
+                                    //     icon: Image.asset(
+                                    //       'assets/images/facebook_logo.png',
+                                    //       height: AppDimensions.imageSize40,
+                                    //       width: AppDimensions.imageSize40,
+                                    //     ),
+                                    //   ),
+                                    // ),
                                   ],
                                 ),
                               ],

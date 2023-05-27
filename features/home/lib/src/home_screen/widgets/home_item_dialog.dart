@@ -48,7 +48,7 @@ class _HomeItemDialogWidgetState extends State<HomeItemDialogWidget> {
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        '${widget.event.date?.day}/${widget.event.date?.month}/${widget.event.date?.year} at ${widget.event.date?.hour}:${widget.event.date?.minute}',
+                        '${widget.event.date.day}/${widget.event.date.month}/${widget.event.date.year}',
                         maxLines: 2,
                         style: AppTextStyle.rubicRegular20.copyWith(
                           fontSize: 16,
