@@ -16,22 +16,20 @@ class SignInWithAppleEvent implements AuthEvent {
   SignInWithAppleEvent();
 }
 
-class SignInWithFacebookEvent implements AuthEvent {
-  SignInWithFacebookEvent();
-}
-
 class SignInWithGoogleEvent implements AuthEvent {
   SignInWithGoogleEvent();
 }
 
 class UpdateUserRegisteredStatusEvent implements AuthEvent {
   UpdateUserRegisteredStatusEvent();
+
   @override
   List<Object> get props => [];
 }
 
 class UpdateUserNotRegisteredStatusEvent implements AuthEvent {
   UpdateUserNotRegisteredStatusEvent();
+
   @override
   List<Object> get props => [];
 }

@@ -55,8 +55,6 @@ class AuthRepositoryImpl extends domain.AuthRepository {
     data.User? user;
     if (param is domain.GoogleSignIn) {
       user = await _authProvider.signInWithGoogle();
-    } else if (param is domain.FacebookSignIn) {
-      user = await _authProvider.signInWithFacebook();
     } else if (param is domain.AppleSignIn) {
       user = await _authProvider.signInWithApple();
     }

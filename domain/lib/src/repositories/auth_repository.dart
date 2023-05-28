@@ -24,6 +24,4 @@ class GoogleSignIn implements SignInSocialParam {}
 
 class AppleSignIn implements SignInSocialParam {}
 
-class FacebookSignIn implements SignInSocialParam {}
-
 abstract class SignInSocialParam {}

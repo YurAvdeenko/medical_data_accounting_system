@@ -15,7 +15,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         super(AuthState.initState()) {
     on<SignInWithEmailAndPasswordEvent>(_signInWithEmailAndPassword);
     on<SignInWithAppleEvent>(_signInWithApple);
-    on<SignInWithFacebookEvent>(_signInWithFacebook);
     on<SignInWithGoogleEvent>(_signInWithGoogle);
     on<RegisterWithEmailAndPasswordEvent>(_registerWithEmailAndPassword);
     on<UpdateUserRegisteredStatusEvent>(_onUpdateUserRegisteredStatusEvent);
@@ -100,15 +99,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async {
     await _authRepository.signInWithSocial(
       AppleSignIn(),
-    );
-  }
-
-  Future<void> _signInWithFacebook(
-    SignInWithFacebookEvent event,
-    Emitter<AuthState> emit,
-  ) async {
-    await _authRepository.signInWithSocial(
-      FacebookSignIn(),
     );
   }
 

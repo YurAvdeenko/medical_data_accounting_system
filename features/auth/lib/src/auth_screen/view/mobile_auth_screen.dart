@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auth/src/auth_screen/bloc/auth_bloc.dart';
 import 'package:auth/src/auth_screen/bloc/auth_event.dart';
 import 'package:auth/src/auth_screen/bloc/auth_state.dart';
@@ -77,35 +79,41 @@ class _MobileAuthorizationPage extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(AppDimensions.borderRadius16),
-                                        color: AppColors.white,
-                                      ),
-                                      child: IconButton(
-                                        onPressed: () => context.read<AuthBloc>().add(SignInWithGoogleEvent()),
-                                        icon: Image.asset(
-                                          'assets/images/google_icon.png',
-                                          height: AppDimensions.imageSize40,
-                                          width: AppDimensions.imageSize40,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: AppDimensions.padding10),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(AppDimensions.borderRadius16),
-                                        color: AppColors.white,
-                                      ),
-                                      child: IconButton(
-                                        onPressed: () => bloc.add(SignInWithAppleEvent()),
-                                        icon: Image.asset(
-                                          'assets/images/apple_logo.png',
-                                          height: AppDimensions.imageSize40,
-                                          width: AppDimensions.imageSize40,
-                                        ),
-                                      ),
-                                    ),
+                                    Platform.isIOS
+                                        ? const SizedBox.shrink()
+                                        : Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(AppDimensions.borderRadius16),
+                                              color: AppColors.white,
+                                            ),
+                                            child: IconButton(
+                                              onPressed: () => context.read<AuthBloc>().add(SignInWithGoogleEvent()),
+                                              icon: Image.asset(
+                                                'assets/images/google_icon.png',
+                                                height: AppDimensions.imageSize40,
+                                                width: AppDimensions.imageSize40,
+                                              ),
+                                            ),
+                                          ),
+                                    Platform.isAndroid
+                                        ? const SizedBox.shrink()
+                                        : const SizedBox(width: AppDimensions.padding10),
+                                    Platform.isAndroid
+                                        ? const SizedBox.shrink()
+                                        : Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(AppDimensions.borderRadius16),
+                                              color: AppColors.white,
+                                            ),
+                                            child: IconButton(
+                                              onPressed: () => bloc.add(SignInWithAppleEvent()),
+                                              icon: Image.asset(
+                                                'assets/images/apple_logo.png',
+                                                height: AppDimensions.imageSize40,
+                                                width: AppDimensions.imageSize40,
+                                              ),
+                                            ),
+                                          ),
                                     // const SizedBox(width: AppDimensions.padding10),
                                     // Container(
                                     //   decoration: BoxDecoration(
@@ -163,50 +171,41 @@ class _MobileAuthorizationPage extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(AppDimensions.borderRadius16),
-                                        color: AppColors.white,
-                                      ),
-                                      child: IconButton(
-                                        onPressed: () => bloc.add(SignInWithGoogleEvent()),
-                                        icon: Image.asset(
-                                          'assets/images/google_icon.png',
-                                          height: AppDimensions.imageSize40,
-                                          width: AppDimensions.imageSize40,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: AppDimensions.padding10),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(AppDimensions.borderRadius16),
-                                        color: AppColors.white,
-                                      ),
-                                      child: IconButton(
-                                        onPressed: () => bloc.add(SignInWithAppleEvent()),
-                                        icon: Image.asset(
-                                          'assets/images/apple_logo.png',
-                                          height: AppDimensions.imageSize40,
-                                          width: AppDimensions.imageSize40,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: AppDimensions.padding10),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(AppDimensions.borderRadius16),
-                                        color: AppColors.white,
-                                      ),
-                                      child: IconButton(
-                                        onPressed: () => bloc.add(SignInWithFacebookEvent()),
-                                        icon: Image.asset(
-                                          'assets/images/facebook_logo.png',
-                                          height: AppDimensions.imageSize40,
-                                          width: AppDimensions.imageSize40,
-                                        ),
-                                      ),
-                                    ),
+                                    Platform.isIOS
+                                        ? const SizedBox.shrink()
+                                        : Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(AppDimensions.borderRadius16),
+                                              color: AppColors.white,
+                                            ),
+                                            child: IconButton(
+                                              onPressed: () => bloc.add(SignInWithGoogleEvent()),
+                                              icon: Image.asset(
+                                                'assets/images/google_icon.png',
+                                                height: AppDimensions.imageSize40,
+                                                width: AppDimensions.imageSize40,
+                                              ),
+                                            ),
+                                          ),
+                                    Platform.isAndroid
+                                        ? const SizedBox.shrink()
+                                        : const SizedBox(width: AppDimensions.padding10),
+                                    Platform.isAndroid
+                                        ? const SizedBox.shrink()
+                                        : Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(AppDimensions.borderRadius16),
+                                              color: AppColors.white,
+                                            ),
+                                            child: IconButton(
+                                              onPressed: () => bloc.add(SignInWithAppleEvent()),
+                                              icon: Image.asset(
+                                                'assets/images/apple_logo.png',
+                                                height: AppDimensions.imageSize40,
+                                                width: AppDimensions.imageSize40,
+                                              ),
+                                            ),
+                                          ),
                                   ],
                                 ),
                               ],

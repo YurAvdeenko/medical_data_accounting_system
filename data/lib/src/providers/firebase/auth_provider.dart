@@ -5,7 +5,6 @@ import 'package:crypto/crypto.dart';
 import 'package:data/src/mappers/firebase/auth_user_mapper.dart';
 import 'package:data/src/model/user.dart' as data;
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
@@ -113,20 +112,6 @@ class AuthProvider {
     }
   }
 
-  Future<data.User?> signInWithFacebook() async {
-    try {
-      final LoginResult loginResult = await FacebookAuth.instance.login();
-      final OAuthCredential facebookAuthCredential =
-          FacebookAuthProvider.credential(loginResult.accessToken!.token);
-      final fbUser = (await FirebaseAuth.instance
-              .signInWithCredential(facebookAuthCredential))
-          .user!;
-
-      return AuthUserMapper.fromFirebase(fbUser);
-    } catch (_) {
-      return null;
-    }
-  }
 
   Future<void> signOut() async => await _fAuth.signOut();
 
